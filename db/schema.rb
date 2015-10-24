@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024023630) do
+ActiveRecord::Schema.define(version: 20151024102015) do
 
   create_table "items", force: :cascade do |t|
     t.string   "asin"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20151024023630) do
     t.string   "medium_image"
     t.string   "large_image"
     t.string   "raw_info"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "wants_count",     default: 0, null: false
+    t.integer  "haves_count",     default: 0, null: false
   end
 
   add_index "items", ["asin"], name: "index_items_on_asin", unique: true

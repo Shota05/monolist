@@ -33,6 +33,8 @@ gem 'amazon-ecs'
 
 gem 'carrierwave'
 
+gem 'counter_culture'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

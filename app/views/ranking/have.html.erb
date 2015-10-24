@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="container-inner inner-sm clearfix">
+   <table class="table">
+        <thead>
+            <tr>
+                <th>Count</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%  @ranking_have.each do |have| %>
+            <tr>
+                <td><%= have.haves_count %></td>
+                <td><%= have.title %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    </div>    
+</div>
