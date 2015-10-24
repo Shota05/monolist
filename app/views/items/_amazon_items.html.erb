@@ -17,9 +17,10 @@
             <%= item.get('ItemAttributes/Title')  %>
           </p>
         </div>
+        <% itemget = Item.find_by(asin: item.get('ASIN')) %>
         <div class="action clearfix">
-            <% if current_user.want?(item) %>
-              <%= render  'items/unwant', item: item  %>
+            <% if current_user.want?(itemget) %>
+              <%= render  'items/unwant', item: itemget  %>
             <% else %>
               <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
                       :class => "want-#{item.get('ASIN')} btn-want btn btn-danger btn-sm want",
@@ -27,8 +28,8 @@
                       :method => :post %>
 
             <% end %>
-             <% if current_user.have?(item) %>
-              <%= render  'items/unhave', item: item  %>
+             <% if current_user.have?(itemget) %>
+              <%= render  'items/unhave', item: itemget  %>
             <% else %>
               <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
                       :class => "have-#{item.get('ASIN')} btn-have btn btn-warning btn-sm have",
