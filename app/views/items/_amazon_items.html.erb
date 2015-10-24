@@ -18,14 +18,23 @@
           </p>
         </div>
         <div class="action clearfix">
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
+            <% if current_user.want?(item) %>
+              <%= render  'items/unwant', item: item  %>
+            <% else %>
+              <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Want") ,
                       :class => "want-#{item.get('ASIN')} btn-want btn btn-danger btn-sm want",
                       :remote => true,
                       :method => :post %>
-          <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
+
+            <% end %>
+             <% if current_user.have?(item) %>
+              <%= render  'items/unhave', item: item  %>
+            <% else %>
+              <%= link_to "" , ownerships_path(asin: item.get('ASIN') , type: "Have") ,
                       :class => "have-#{item.get('ASIN')} btn-have btn btn-warning btn-sm have",
                       :remote => true,
                       :method => :post %>
+            <% end %>
         </div>
       </div>
     <% end %>
