@@ -1,16 +1,27 @@
+<% content_for :head do %>
+  <title><%= @item.title %> - monolist</title>
+  <meta name="description" content="<%=@item.title%>に関する情報です。この商品を欲しい人、持ってる人を表示しています。">
+<% end %>
+
 <div class="container">
   <div class="container-inner inner-sm clearfix">
     <div class="item-single-main">
       <div class="image">
         <div class="img-wrap">
           <% #TODO 商品イメージ %>
-          <%= image_tag("no-image.png" , alt: @item.title) %>
+          <% get_image = @item.large_image  %>
+          <% if get_image.present? %>
+            <%= image_tag(get_image, alt: @item.title)  %>
+          <% else %>
+            <%= image_tag("no-image.png" , alt: @item.title) %>
+          <% end %>
+          
         </div>
       </div>
       <div class="title">
         <% #TODO 商品タイトル %>
-        仮タイトル
-      </div>
+        <%= @item.title %>
+     </div>
       <%= render 'action' , item: @item %>
     </div>
     <div class="item-single-side">
@@ -18,18 +29,35 @@
         <h4 class="side-box-title">Haveしたユーザー</h4>
         <div class="side-box-body">
           <% # TODO Haveしたユーザー一覧 %>
-
+          <% @item.have_users.each do |user| %>
+          <div id="logo">
+            <% if user.image? %>
+              <%= link_to(image_tag(user.image.thumb.url), user_path) %>
+            <% else %>
+              <%= link_to(image_tag("no-image.png"),user_path) %>
+            <% end %>
+          </div> 
+          <% end %>
         </div>
       </div>
       <div class="side-box">
         <h4 class="side-box-title">Wantしたユーザー</h4>
         <div class="side-box-body">
           <% # TODO Wantしたユーザー一覧 %>
+          <% @item.want_users.each do |user| %>
+          <div id="logo">
+            <% if user.image? %>
+              <%= link_to(image_tag(user.image.thumb.url, ), user_path) %>
+            <% else %>
+              <%= link_to(image_tag("no-image.png"),user_path) %>
+            <% end %>
+          </div> 
+          <% end %>
         </div>
       </div>
       <div class="text-center">
         <% #TODO 正しいリンク先に %>
-        <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), '#') %>
+        <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), @item.detail_page_url) %>
       </div>
     </div>
   </div>

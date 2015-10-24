@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 50 }
+  mount_uploader :image, ImageUploader
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -18,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :want_items , through: :wants, source: :item
   has_many :haves, class_name: "Have", foreign_key: "user_id", dependent: :destroy
   has_many :have_items , through: :haves, source: :item
+  
+  
 
 
   # 他のユーザーをフォローする
