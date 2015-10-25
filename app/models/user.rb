@@ -60,4 +60,13 @@ class User < ActiveRecord::Base
   def want?(item)
     want_items.include?(item)
   end
+  
+  #ASIN用のWant、Have
+  def want_asin?(item) 
+    want_items.exists?(asin: item.get('ASIN'))
+  end
+  
+  def have_asin?(item) 
+    have_items.exists?(asin: item.get('ASIN'))
+  end
 end

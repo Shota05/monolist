@@ -32,7 +32,7 @@
           <% @item.have_users.each do |user| %>
           <div id="logo">
             <% if user.image? %>
-              <%= link_to(image_tag(user.image.thumb.url), user_path(user)) %>
+              <%= link_to(image_tag(user.image.url), user_path(user)) %>
             <% else %>
               <%= link_to(image_tag("no-image.png"),user_path(user)) %>
             <% end %>
@@ -47,7 +47,7 @@
           <% @item.want_users.each do |user| %>
           <div id="logo">
             <% if user.image? %>
-              <%= link_to(image_tag(user.image.thumb.url, ), user_path(user)) %>
+              <p class="trimming"><%= link_to(image_tag(user.image.url, ), user_path(user)) %></p>
             <% else %>
               <%= link_to(image_tag("no-image.png"),user_path(user)) %>
             <% end %>

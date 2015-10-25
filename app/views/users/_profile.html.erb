@@ -1,6 +1,10 @@
 <div class="user-profile">
   <div class="icon">
-    <%= gravatar_for user, size: 100 %>
+    <% if logged_in? && @user == current_user %>
+      <%= link_to(image_tag(@user.image.url), edit_user_path(@user) ,data: {confirm: "画像を変更しますか？"}) %>
+    <% else %>
+      <%= gravatar_for user , size: 100 %>
+    <% end %>  
   </div>
   <div class="name">
     <h1><%= user.name %><h1>
